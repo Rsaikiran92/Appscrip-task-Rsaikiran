@@ -1,0 +1,110 @@
+.navbar_1 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  background-color: black;
+  color: #eb4c6b;
+}
+.navbar_1 > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.navbar_2 {
+  padding: 20px 40px;  
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+.icon {
+  font-size: 25px;
+}
+.hideicon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.menu {
+  display: none;
+}
+.navbar_2 > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar_2 > div:nth-child(3) {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.logo {
+  width: 120px;
+}
+.navbar_3 {
+  border-bottom: 1px solid gray;
+  padding: 20px;
+  padding-left: 25%;
+  padding-right: 25%;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .navbar_1 > div {
+    width: auto;
+  }
+  .navbar_1 > div:nth-of-type(odd) {
+    display: none;
+    padding: 5px;
+  }
+  .navbar_1 {
+    font-size: 15px;
+  }
+  .navbar_2 {
+    padding: 15px 10px;
+    justify-content: space-between;
+  }
+  .logo {
+    width: 80px;
+  }
+  .icon {
+    font-size: 25px;
+  }
+  .hideicon{
+    display: none;
+  }
+  .menu {
+    display: block;
+    font-size: 30px;
+  }
+
+  .brandlogo {
+    width: 20px;
+  }
+  .navbar_2 > div:nth-child(3) {
+    gap: 10px;
+  }
+  .navbar_3 {
+    display: none;
+  }
+  .menu_container {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    position: absolute;
+    top: 80px; /* adjust based on your navbar height */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    
+  }
+
+}
