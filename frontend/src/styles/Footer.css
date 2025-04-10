@@ -115,4 +115,12 @@ button {
     width: 100%;
     margin-top: 20px;
   }
+  input {
+    padding: 10px;
+    width: 150px;
+  }
+  button {
+    height: 40px;
+    margin-top: 20px;
+  }
 }
