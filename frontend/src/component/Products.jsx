@@ -5,23 +5,46 @@ import {
   IoIosArrowForward,
   IoIosArrowBack,
 } from "react-icons/io";
+import { AiOutlineHeart } from "react-icons/ai";
 import "../styles/Products.css";
 
 function Products() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const [recommended,setrecommended]=useState(false)
+  const [sortedProducts, setSortedProducts] = useState([]);
+  const [sortOption, setSortOption] = useState("RECOMMENDED");
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data);
+        setSortedProducts(data); 
+      })
       .catch((error) => console.log(error));
   }, []);
+
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
   };
+  
+  const handleSortChange = (e) => {
+    const option = e.target.value;
+    setSortOption(option);
+
+    let sorted = [...products];
+    if (option === "Price : high to low") {
+      sorted.sort((a, b) => b.price - a.price);
+    } else if (option === "Price : low to high") {
+      sorted.sort((a, b) => a.price - b.price);
+    } else {
+      sorted = [...products]; 
+    }
+    setSortedProducts(sorted);
+  };
+
+
   return (
     <div className="products">
       <div className="procucts_header">
@@ -41,17 +64,17 @@ function Products() {
             {isFilterOpen ? <IoIosArrowBack /> : <IoIosArrowForward />} FILETER
           </div>
         </div>
-        <div onClick={()=>setrecommended(!recommended)}>RECOMMENDED {recommended ? < IoIosArrowDown/> : <IoIosArrowUp />}</div>
-        
+        {/* 
+        <div onClick={()=>setrecommended(!recommended)}>RECOMMENDED {recommended ? < IoIosArrowDown/> : <IoIosArrowUp />}</div> */}
+        <select class="select" value={sortOption} onChange={handleSortChange}>
+          <option>RECOMMENDED</option>
+          <option>Newest first</option>
+          <option>popular</option>
+          <option>Price : high to low</option>
+          <option>Price : low to high</option>
+        </select>
       </div>
       <div className="products_container">
-      <div className={`recommended ${recommended ? "recommended_container" : ""}`}>
-          <div>SHOP</div>
-          <div>SKILLS</div>
-          <div>STORIES</div>
-          <div>ABOUT</div>
-          <div>CONTACT US</div>
-        </div>
         {isFilterOpen && (
           <div className="filter_container">
             <div>
@@ -133,10 +156,16 @@ function Products() {
             isFilterOpen ? "three-columns" : "four-columns"
           }`}
         >
-          {products.map((product) => (
+          {sortedProducts.map((product) => (
             <div>
               <img src={product.image} alt="product" />
-              <b>{product.title}</b>
+              <h4>{product.title}</h4>
+              <div>
+                <div>{product.description}</div>
+                <div>
+                  <AiOutlineHeart />
+                </div>
+              </div>
             </div>
           ))}
         </div>
